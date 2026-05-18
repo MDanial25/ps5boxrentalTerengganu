@@ -71,6 +71,7 @@
         h1 { font-size: 2rem; font-weight: 700; color: #0f172a; }
         h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
 
+        /* Login Overlay - Ringkas, hanya 1 button */
         .login-overlay {
             position: fixed;
             top: 0;
@@ -92,19 +93,10 @@
             padding: 2rem;
             border: 1px solid #e2e8f0;
             box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            text-align: center;
         }
-        .login-card input {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            margin: 0.7rem 0;
-            background: #fff;
-            border: 1px solid #cbd5e1;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            outline: none;
-        }
-        .login-card input:focus { border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.1); }
-        .login-card button {
+        
+        .btn-dashboard {
             background: #0f172a;
             width: 100%;
             padding: 0.85rem;
@@ -113,9 +105,21 @@
             font-weight: 600;
             color: white;
             cursor: pointer;
-            margin-top: 0.8rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+            transition: 0.2s;
         }
-        .error-msg { color: #dc2626; font-size: 0.8rem; margin-top: 0.25rem; }
+        .btn-dashboard:hover {
+            background: #1e293b;
+            transform: scale(1.02);
+        }
+        
+        .info-text {
+            font-size: 0.8rem;
+            color: #5b6e8c;
+            margin-top: 1rem;
+            line-height: 1.4;
+        }
 
         .calendar-wrapper { margin-top: 1rem; background: #fafcff; border-radius: 20px; }
         .rent-status {
@@ -144,12 +148,6 @@
             cursor: not-allowed;
             opacity: 0.7;
         }
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #0f172a;
-            color: #0f172a;
-        }
-        .btn-outline:hover { background: #f1f5f9; }
 
         .price-img-container, .feedback-img-area { text-align: center; margin: 1rem 0; }
         .price-img-container img, .feedback-img-area img {
@@ -190,17 +188,16 @@
 </head>
 <body>
 
-<!-- LOGIN OVERLAY -->
+<!-- LOGIN OVERLAY - HANYA SATU BUTTON (seperti dalam gambar) -->
 <div id="loginOverlay" class="login-overlay">
     <div class="login-card">
         <h2 style="margin-bottom: 0.3rem;">🎮 Game Kotak Terengganu</h2>
-        <p style="margin-bottom: 1.2rem; color:#475569;">Sila masukkan maklumat anda</p>
-        <input type="text" id="loginName" placeholder="Nama penuh" autocomplete="off">
-        <input type="tel" id="loginPhone" placeholder="No. Telefon (012-3456789)">
-        <input type="text" id="loginTempat" placeholder="Tempat / Alamat">
-        <div id="loginError" class="error-msg"></div>
-        <button id="submitLoginBtn">Teruskan ke Laman Utama</button>
-        <p class="inline-note" style="text-align:center; margin-top:1rem;">* Notifikasi akan dihantar ke e-mel admin selepas login</p>
+        <p style="margin-bottom: 1.2rem; color:#475569;">Pastikan anda sudah isi Google Form</p>
+        
+        <!-- Button untuk terus ke Laman Utama -->
+        <button id="directToHomeBtn" class="btn-dashboard">✅ Saya sudah isi, terus ke Laman Utama</button>
+        
+        <p class="info-text">© 2026 Game Kotak Terengganu. All rights reserved.</p>
     </div>
 </div>
 
@@ -229,10 +226,10 @@
                     </button>
                     <span id="cooldownTimer" style="margin-left: 1rem; font-size: 0.8rem; color: #475569;"></span>
                 </div>
-                <p class="inline-note" style="margin-top: 1rem;">✨ Klik butang di atas untuk menghantar tempahan terus ke WhatsApp admin.</p>
+                <p class="inline-note" style="margin-top: 1rem;">✨ Klik butang di atas untuk menghantar tempahan terus ke WhatsApp admin (01158709835).</p>
                 <p class="inline-note" style="margin-top: 1rem; cursor: pointer; color: #2563eb; text-decoration: underline;" onclick="switchPage('price')">
-    ✨ Klik di sini untuk melihat Senarai Harga terkini.
-</p>
+                    ✨ Klik di sini untuk melihat Senarai Harga terkini.
+                </p>
             </div>
         </div>
 
@@ -240,14 +237,15 @@
         <div id="pricePage" class="page">
             <div class="card">
                 <h2>📋 Senarai Harga Sewaan</h2>
-                <p>Price list penawaran harga terkini.</p>
-                <p>klik pada gambar untuk "pop up" yang lebih jelas.</p>
+                <p>* Price list penawaran harga terkini.</p>
+                <p>* Klik pada gambar untuk "pop up" yang lebih jelas.</p>
                 <div class="price-img-container">
                     <img src="muka-depan-price-list.png" alt="Price List" style="max-width:100%; cursor:pointer;" loading="lazy">
                     <img src="price-list-terkini.png" alt="Price List" style="max-width:100%; cursor:pointer;" loading="lazy">
                     <img src="Senarai-games.png" alt="Price List" style="max-width:100%; cursor:pointer;" loading="lazy">
                 </div>
                 <p class="inline-note">💡 2 pakej pilihan basic/pro.</p>
+                <p class="inline-note">💡 Special lower price for student (Must have student ID).</p>
                 <p class="inline-note">💡Tips: PM Owner sekarang untuk rundingan lanjut dan tawaran harga menarik!</p>
             </div>
         </div>
@@ -272,31 +270,28 @@
                     <img src="ws-12.jpeg" alt="Feedback" style="max-width:100%; cursor:pointer;" loading="lazy">
                     <img src="ws-13.jpeg" alt="Feedback" style="max-width:100%; cursor:pointer;" loading="lazy">
                     <img src="ws-14.jpeg" alt="Feedback" style="max-width:100%; cursor:pointer;" loading="lazy">
-                   
-                  
                     <img src="ws-17.jpeg" alt="Feedback" style="max-width:100%; cursor:pointer;" loading="lazy">
-                    
 
                     <!-- Video Feedback -->
                     <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy">
                         <source src="video-1.mp4" type="video/mp4">
                     </video>
-                    <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy    ">
+                    <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy">
                         <source src="video-2.mp4" type="video/mp4">
                     </video>
                     <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy">
                         <source src="video-3.mp4" type="video/mp4">
                     </video>
-                    <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy    ">
+                    <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy">
                         <source src="video-4.mp4" type="video/mp4">
                     </video>
                     <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy">
                         <source src="video-5.mp4" type="video/mp4">
                     </video>
-                    <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy    ">
+                    <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy">
                         <source src="video-6.mp4" type="video/mp4">
                     </video>
-                    <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy            ">
+                    <video class="feedbackVideo" controls style="max-width:100%; margin-top:1rem; cursor:pointer;" loading="lazy">
                         <source src="video-7.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -310,50 +305,7 @@
 
 <script>
     // ============================================================
-    // 1. FUNGSI HANTAR EMAIL (untuk LOGIN sahaja)
-    // ============================================================
-    async function hantarNotifikasiEmail(user, jenis, detail = "") {
-        const adminEmail = "muhddanialv738@gmail.com";
-        let subject = `PS5 Rental: ${jenis} - ${user.name}`;
-        let message = `
-            📋 MAKLUMAT PELANGGAN
-            Nama: ${user.name}
-            Telefon: ${user.phone}
-            Tempat: ${user.tempat}
-            Jenis: ${jenis}
-            Detail: ${detail}
-            Masa: ${new Date().toLocaleString()}
-        `;
-        
-        const formSubmitUrl = "https://formsubmit.co/ajax/muhddanialv738@gmail.com";
-        
-        try {
-            const response = await fetch(formSubmitUrl, {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: user.name,
-                    _subject: subject,
-                    message: message,
-                    _replyto: user.phone,
-                    _template: "table"
-                })
-            });
-            if (response.ok) {
-                showToast(`✅ Notifikasi LOGIN dihantar ke muhddanialv738@gmail.com`);
-                return true;
-            } else {
-                throw new Error("Gagal hantar");
-            }
-        } catch (error) {
-            console.error("Email error:", error);
-            showToast(`📧 Notifikasi LOGIN dihantar ke email admin`);
-            return false;
-        }
-    }
-    
-    // ============================================================
-    // 2. FUNGSI HANTAR KE WHATSAPP (untuk BUTANG TEMPAHAN)
+    // FUNGSI HANTAR KE WHATSAPP (untuk BUTANG TEMPAHAN)
     // ============================================================
     function hantarKeWhatsApp(user, tarikhSewaan) {
         const adminNo = "601158709835";
@@ -384,34 +336,28 @@
     
     // GLOBAL STATE
     let isLoggedIn = false;
-    let userData = { name: "", phone: "", tempat: "" };
+    let userData = { name: "Pelanggan", phone: "", tempat: "" };
     let selectedDates = [];
     let flatpickrInstance = null;
     let isCooldown = false;
     
-    // LOGIN
-    async function performLogin() {
-        const name = document.getElementById('loginName').value.trim();
-        const phone = document.getElementById('loginPhone').value.trim();
-        const tempat = document.getElementById('loginTempat').value.trim();
-        if (!name || !phone || !tempat) {
-            document.getElementById('loginError').innerText = 'Sila lengkapkan semua maklumat.';
-            return false;
+    // LOGIN - direct sahaja ke laman utama
+    async function directToHomepage() {
+        // Minta nama untuk welcome message
+        let name = prompt("Masukkan nama anda (untuk paparan di laman utama):", "Pelanggan");
+        if (name && name.trim() !== "") {
+            userData.name = name.trim();
+        } else {
+            userData.name = "Pelanggan";
         }
-        if (phone.length < 6) {
-            document.getElementById('loginError').innerText = 'No. telefon tidak sah.';
-            return false;
-        }
-        userData = { name, phone, tempat };
+        
         isLoggedIn = true;
         
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById('appContent').style.display = 'block';
         
         updateWelcomeMessage();
-        showToast(`Selamat datang, ${name}!`);
-        
-        await hantarNotifikasiEmail(userData, "Pendaftaran Pelanggan", `Pelanggan baru mendaftar: ${name}`);
+        showToast(`Selamat datang, ${userData.name}! Terima kasih sudah isi Google Form.`);
         
         initCalendar();
         return true;
@@ -545,11 +491,10 @@
         document.getElementById('loginOverlay').style.display = 'flex';
         document.getElementById('appContent').style.display = 'none';
         
-        const loginBtn = document.getElementById('submitLoginBtn');
-        if (loginBtn) {
-            loginBtn.addEventListener('click', async () => {
-                await performLogin();
-            });
+        // Button untuk terus ke Laman Utama
+        const directToHomeBtn = document.getElementById('directToHomeBtn');
+        if (directToHomeBtn) {
+            directToHomeBtn.addEventListener('click', directToHomepage);
         }
         
         document.querySelectorAll('.nav-btn').forEach(btn => {
